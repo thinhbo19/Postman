@@ -7,14 +7,17 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
+
+      # Cài đặt Postman CLI cho hệ điều hành Linux (Ubuntu)
       - name: Install Postman CLI
         run: |
-          powershell.exe -NoProfile -InputFormat None -ExecutionPolicy AllSigned -Command 
-          "[System.Net.ServicePointManager]::SecurityProtocol = 3072; 
-          iex ((New-Object System.Net.WebClient).DownloadString('https://dl-cli.pstmn.io/install/win64.ps1'))"
+          curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
 
+      # Đăng nhập vào Postman CLI bằng API key
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
+
+      # Chạy API tests sử dụng Postman Collection
       - name: Run API tests
         run: |
           postman collection run "30293157-64a448de-f4b4-4689-8b84-cd5a3864e3dc"
