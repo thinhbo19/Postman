@@ -47,3 +47,4 @@ jobs:
           publish_dir: ./report
           publish_branch: gh-pages
           commit_message: "Deploy Postman Report"
+          github_token: ${{ secrets.GH_TOKEN }} # Sử dụng token GitHub
