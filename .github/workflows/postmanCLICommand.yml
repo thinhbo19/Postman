@@ -17,7 +17,11 @@ jobs:
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
 
+      # Đảm bảo rằng biến môi trường baseurl được thiết lập đúng
+      - name: Set up environment variables
+        run: echo "baseurl=http://localhost:8000" >> $GITHUB_ENV
+
       # Chạy API tests sử dụng Postman Collection
       - name: Run API tests
         run: |
-          postman collection run "30293157-64a448de-f4b4-4689-8b84-cd5a3864e3dc"
+          postman collection run "30293157-64a448de-f4b4-4689-8b84-cd5a3864e3dc" -e "30293157-e9390256-d60b-4857-ac3d-a9052391bc28"
