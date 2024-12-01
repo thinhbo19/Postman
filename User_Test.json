@@ -59,12 +59,10 @@
 					}
 				},
 				"url": {
-					"raw": "http://localhost:8000/user/register",
-					"protocol": "http",
+					"raw": "{{baseURL}}/user/register",
 					"host": [
-						"localhost"
+						"{{baseURL}}"
 					],
-					"port": "8000",
 					"path": [
 						"user",
 						"register"

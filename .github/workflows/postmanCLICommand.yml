@@ -19,7 +19,7 @@ jobs:
 
       # Đảm bảo rằng biến môi trường baseurl được thiết lập đúng
       - name: Set up environment variables
-        run: echo "baseurl=http://localhost:8000" >> $GITHUB_ENV
+        run: echo "baseurl=https://shoesstore-backend-production.up.railway.app" >> $GITHUB_ENV
 
       # Chạy API tests sử dụng Postman Collection
       - name: Run API tests
