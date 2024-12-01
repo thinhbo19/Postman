@@ -31,11 +31,19 @@ jobs:
 
       # Chạy kiểm thử Postman với Newman
       - name: Run Newman tests
-        run: newman run ./User_Test.json -e ./ShoesStoreEnv.json --reporters html --reporter-html-export report.html
+        run: newman run ./User_Test.json -e ./ShoesStoreEnv.json --reporters html --reporter-html-export ./report/report.html
 
       # Upload báo cáo HTML dưới dạng artifact
       - name: Upload HTML report as artifact
         uses: actions/upload-artifact@v3
         with:
           name: postman-report
-          path: report.html
+          path: ./report/report.html
+
+      # Đưa báo cáo HTML lên GitHub Pages hoặc một nơi công khai
+      - name: Upload HTML Report to GitHub Pages
+        uses: peaceiris/actions-gh-pages@v3
+        with:
+          publish_dir: ./report
+          publish_branch: gh-pages
+          commit_message: "Deploy Postman Report"
