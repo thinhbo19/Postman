@@ -32,7 +32,7 @@ jobs:
       # Chạy kiểm thử Postman với Newman
       - name: Run Newman tests
         run: |
-          newman run User_Test.json -e ShoesStoreEnv.json --reporters html --reporter-html-export report.html
+          newman run User_Test.json -e ShoesStoreEnv.json --reporters html --reporter-html-export report.html --verbose
 
       # Upload báo cáo HTML dưới dạng artifact
       - name: Upload HTML report as artifact
