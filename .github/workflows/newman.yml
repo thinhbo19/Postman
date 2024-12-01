@@ -3,10 +3,10 @@ name: Run Postman Tests with Newman
 on:
   push:
     branches:
-      - main
+      - master
   pull_request:
     branches:
-      - main
+      - master
 
 jobs:
   newman_test:
