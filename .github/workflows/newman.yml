@@ -21,7 +21,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: "14" # Chọn phiên bản Node.js bạn muốn
+          node-version: "21" # Chọn phiên bản Node.js bạn muốn
 
       # Cài đặt Newman và các dependencies
       - name: Install dependencies
