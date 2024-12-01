@@ -1,0 +1,155 @@
+{
+	"info": {
+		"_postman_id": "64a448de-f4b4-4689-8b84-cd5a3864e3dc",
+		"name": "User_Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "30293157"
+	},
+	"item": [
+		{
+			"name": "SignUp",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"if (pm.response.code === 200) {\r",
+							"    const data = pm.response.json();\r",
+							"    const newUserEmail = data.CreateUser.email;\r",
+							"    pm.environment.set(\"newUserEmail\", newUserEmail);\r",
+							"    pm.test(\"Đăng ký thành công\", function () {\r",
+							"        pm.expect(data).to.have.property(\"CreateUser\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"if (pm.response.code === 400) {\r",
+							"    const data = pm.response.json();\r",
+							"\r",
+							"    \r",
+							"    if (data.msg) {\r",
+							"        pm.test( data.msg, function () {\r",
+							"            pm.expect(data.msg).to.be.a(\"string\"); \r",
+							"        });\r",
+							"    } \r",
+							"    else if (data.errors && Array.isArray(data.errors)) {\r",
+							"        const firstErrorMsg = data.errors[0]?.msg; \r",
+							"    \r",
+							"        pm.test(firstErrorMsg, function () {\r",
+							"            pm.expect(firstErrorMsg).to.be.a(\"string\"); \r",
+							"        });\r",
+							"    }\r",
+							"}\r",
+							""
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"username\": \"adminWebasda ad sdas\",\r\n  \"phoneNumber\": \"0931205778\",\r\n  \"email\":\"thinhbo0319@gmail.com\",\r\n  \"password\":\"1234qwer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/user/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"user",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Login",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"\r",
+							"\r",
+							"// Kiểm tra xem phản hồi có chứa token không\r",
+							"if (pm.response.code === 200) {\r",
+							"    // Lấy token từ phản hồi\r",
+							"    const responseData = pm.response.json();\r",
+							"    const accessToken = responseData.accessToken;\r",
+							"    \r",
+							"    // Set lại token trong biến môi trường của Postman\r",
+							"    pm.environment.set(\"accessToken\", accessToken);\r",
+							"    \r",
+							"    // Kiểm tra thông báo đăng nhập thành công\r",
+							"    pm.test(\"Đăng nhập thành công\", function () {\r",
+							"        pm.expect(responseData).to.have.property(\"accessToken\");\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"\r",
+							"if (pm.response.code === 400) {\r",
+							"    const data = pm.response.json();\r",
+							"    const firstErrorMsg = data.errors[0]?.msg; \r",
+							"    if(pm.environment.get(\"newUserEmail\") === \"\"){\r",
+							"        const firstErrorMsg = data.errors[0]?.msg; \r",
+							"    \r",
+							"        pm.test(\"Đăng ký thất bại nên không có email đăng nhập\", function () {\r",
+							"            pm.expect(firstErrorMsg).to.be.a(\"string\"); \r",
+							"        });\r",
+							"    }else{\r",
+							"        pm.test(firstErrorMsg, function () {\r",
+							"            pm.expect(firstErrorMsg).to.be.a(\"string\"); \r",
+							"        }); \r",
+							"    }  \r",
+							"}\r",
+							"\r",
+							" if (pm.response.code === 401) {\r",
+							"    const data = pm.response.json();\r",
+							"        pm.test(data.message, function () {\r",
+							"            pm.expect(data.message).to.be.a(\"string\"); \r",
+							"        });\r",
+							"    } "
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n  \"email\": \"{{newUserEmail}}\",\r\n  \"password\":\"1234qwer\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{baseURL}}/user/login",
+					"host": [
+						"{{baseURL}}"
+					],
+					"path": [
+						"user",
+						"login"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

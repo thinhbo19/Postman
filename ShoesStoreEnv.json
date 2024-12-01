@@ -1,0 +1,27 @@
+{
+	"id": "e9390256-d60b-4857-ac3d-a9052391bc28",
+	"name": "ShoesStoreEnv",
+	"values": [
+		{
+			"key": "baseURL",
+			"value": "http://localhost:8000",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newUserEmail",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-12-01T16:04:30.198Z",
+	"_postman_exported_using": "Postman/11.20.0"
+}
