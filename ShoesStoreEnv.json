@@ -1,39 +1,33 @@
 {
-  "id": "e9390256-d60b-4857-ac3d-a9052391bc28",
-  "name": "ShoesStoreEnv",
-  "values": [
-    {
-      "key": "baseURL",
-      "value": "https://shoesstore-backend-production.up.railway.app",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "baseURL",
-      "value": "http://localhost:8000",
-      "type": "default",
-      "enabled": false
-    },
-    {
-      "key": "newUserEmail",
-      "value": "",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "newPass",
-      "value": "",
-      "type": "default",
-      "enabled": true
-    },
-    {
-      "key": "accessToken",
-      "value": "",
-      "type": "default",
-      "enabled": true
-    }
-  ],
-  "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2024-12-02T03:08:36.656Z",
-  "_postman_exported_using": "Postman/11.21.0"
+	"id": "e9390256-d60b-4857-ac3d-a9052391bc28",
+	"name": "ShoesStoreEnv",
+	"values": [
+		{
+			"key": "baseURL",
+			"value": "https://shoesstore-backend-production.up.railway.app",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newUserEmail",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "newPass",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		},
+		{
+			"key": "accessToken",
+			"value": "",
+			"type": "default",
+			"enabled": true
+		}
+	],
+	"_postman_variable_scope": "environment",
+	"_postman_exported_at": "2024-12-02T03:13:08.268Z",
+	"_postman_exported_using": "Postman/11.21.0"
 }
