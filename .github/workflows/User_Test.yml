@@ -6,18 +6,12 @@ jobs:
   automated-api-tests:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
-
+      - uses: actions/checkout@v4
       - name: Install Postman CLI
         run: |
           curl -o- "https://dl-cli.pstmn.io/install/linux64.sh" | sh
-
       - name: Login to Postman CLI
         run: postman login --with-api-key ${{ secrets.POSTMAN_API_KEY }}
-
-      - name: Set up environment variables
-        run: echo "baseurl=https://shoesstore-backend-production.up.railway.app" >> $GITHUB_ENV
-
       - name: Run API tests
         run: |
-          postman collection run "30293157-64a448de-f4b4-4689-8b84-cd5a3864e3dc" -e "30293157-e9390256-d60b-4857-ac3d-a9052391bc28" --env-var baseurl=https://shoesstore-backend-production.up.railway.app
+          postman collection run "30293157-64a448de-f4b4-4689-8b84-cd5a3864e3dc" -e "30293157-e9390256-d60b-4857-ac3d-a9052391bc28"
