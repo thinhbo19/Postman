@@ -9,7 +9,19 @@
       "enabled": true
     },
     {
+      "key": "baseURL",
+      "value": "http://localhost:8000",
+      "type": "default",
+      "enabled": false
+    },
+    {
       "key": "newUserEmail",
+      "value": "",
+      "type": "default",
+      "enabled": true
+    },
+    {
+      "key": "newPass",
       "value": "",
       "type": "default",
       "enabled": true
@@ -22,6 +34,6 @@
     }
   ],
   "_postman_variable_scope": "environment",
-  "_postman_exported_at": "2024-12-01T18:33:23.963Z",
-  "_postman_exported_using": "Postman/11.20.0"
+  "_postman_exported_at": "2024-12-02T03:08:36.656Z",
+  "_postman_exported_using": "Postman/11.21.0"
 }
