@@ -19,7 +19,7 @@
 							"    const newPass = data.CreateUser.password;\r",
 							"    pm.environment.set(\"newUserEmail\", newUserEmail);\r",
 							"    pm.environment.set(\"newPass\", newPass);\r",
-							"    pm.test(\"Đăng ký thành công\", function () {\r",
+							"    pm.test(\"Email: \" + newUserEmail + \"đăng ký thành công\", function () {\r",
 							"        pm.expect(data).to.have.property(\"CreateUser\");\r",
 							"    });\r",
 							"}\r",
@@ -150,6 +150,35 @@
 				}
 			},
 			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseURL",
+			"value": "https://shoesstore-backend-production.up.railway.app",
+			"type": "string"
 		}
 	]
 }
