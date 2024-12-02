@@ -16,7 +16,9 @@
 							"if (pm.response.code === 200) {\r",
 							"    const data = pm.response.json();\r",
 							"    const newUserEmail = data.CreateUser.email;\r",
+							"    const newPass = data.CreateUser.password;\r",
 							"    pm.environment.set(\"newUserEmail\", newUserEmail);\r",
+							"    pm.environment.set(\"newPass\", newPass);\r",
 							"    pm.test(\"Đăng ký thành công\", function () {\r",
 							"        pm.expect(data).to.have.property(\"CreateUser\");\r",
 							"    });\r",
@@ -59,13 +61,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/user/register",
+					"raw": "{{baseURL}}/user/registerTest",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"user",
-						"register"
+						"registerTest"
 					]
 				}
 			},
@@ -129,7 +131,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n  \"email\": \"{{newUserEmail}}\",\r\n  \"password\":\"1234qwer\"\r\n}",
+					"raw": "{\r\n  \"email\": \"{{newUserEmail}}\",\r\n  \"password\":\"{{newPass}}\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -137,13 +139,13 @@
 					}
 				},
 				"url": {
-					"raw": "{{baseURL}}/user/login",
+					"raw": "{{baseURL}}/user/loginTest",
 					"host": [
 						"{{baseURL}}"
 					],
 					"path": [
 						"user",
-						"login"
+						"loginTest"
 					]
 				}
 			},
