@@ -56,7 +56,7 @@
         "header": [],
         "body": {
           "mode": "raw",
-          "raw": "{\r\n  \"username\": \"Hưng Thịnh\",\r\n  \"phoneNumber\": \"0931205778\",\r\n  \"email\":\"thinhbo0319@gmail.com\",\r\n  \"password\":\"123qwe\"\r\n}",
+          "raw": "{\r\n  \"username\": \"Hưng Thịnh\",\r\n  \"phoneNumber\": \"0931205778\",\r\n  \"email\":\"thinhbo0319@gmail.com\",\r\n  \"password\":\"1234qwer\"\r\n}",
           "options": {
             "raw": {
               "language": "json"
