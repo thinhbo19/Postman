@@ -26,8 +26,8 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-html
 
-      - name: Run Newman tests
-        run: newman run ./Collections/User_Test.json -e ./ShoesStoreEnv.json --reporters html --reporter-html-export ./report/report.html
+      - name: Test User Function
+        run: newman run ./Collections/User_Test.json -e ./ShoesStoreEnv.json --reporters html --reporter-html-export ./report/report-user.html
 
       - name: Upload HTML report as artifact
         uses: actions/upload-artifact@v3
