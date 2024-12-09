@@ -26,9 +26,6 @@ jobs:
           npm install -g newman
           npm install -g newman-reporter-html
 
-      - name: Debug Paths
-        run: ls -R
-
       - name: Test User Function
         run: newman run ./Collections/Authentication.json -e ./ShoesStoreEnv.json --reporters html --reporter-html-export ./report/report.html
 
