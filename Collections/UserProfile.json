@@ -1,0 +1,272 @@
+{
+  "info": {
+    "_postman_id": "c6b768d7-ae92-4636-bdd9-ea4c4513945a",
+    "name": "UserProfile",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "30293157"
+  },
+  "item": [
+    {
+      "name": "Login",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "// Kiểm tra xem phản hồi có chứa token không\r",
+              "if (pm.response.code === 200) {\r",
+              "\r",
+              "    const responseData = pm.response.json();\r",
+              "    \r",
+              "    const accessTokenForUpdate = responseData.accessToken;\r",
+              "    const userId = responseData.user._id;\r",
+              "    pm.environment.set(\"accessTokenForUpdate\", accessTokenForUpdate);\r",
+              "    pm.environment.set(\"userId\", userId);\r",
+              "\r",
+              "    pm.test(\"Đăng nhập thành công\", function () {\r",
+              "        pm.expect(responseData).to.have.property(\"accessToken\");\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "\r",
+              "if (pm.response.code === 400) {\r",
+              "    pm.test(\"Status code is 400\", function () {\r",
+              "    pm.response.to.have.status(400);\r",
+              "});\r",
+              "\r",
+              "    const data = pm.response.json();\r",
+              "    const firstErrorMsg = data.errors[0]?.msg; \r",
+              "    if(pm.environment.get(\"newUserEmail\") === \"\"){\r",
+              "        const firstErrorMsg = data.errors[0]?.msg; \r",
+              "    \r",
+              "        pm.test(\"Đăng ký thất bại nên không có email đăng nhập\", function () {\r",
+              "            pm.expect(firstErrorMsg).to.be.a(\"string\"); \r",
+              "        });\r",
+              "    }else{\r",
+              "        pm.test(firstErrorMsg, function () {\r",
+              "            pm.expect(firstErrorMsg).to.be.a(\"string\"); \r",
+              "        }); \r",
+              "    }  \r",
+              "}\r",
+              "\r",
+              " if (pm.response.code === 401) {\r",
+              "    const data = pm.response.json();\r",
+              "        pm.test(data.message, function () {\r",
+              "            pm.expect(data.message).to.be.a(\"string\"); \r",
+              "        });\r",
+              "    } "
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n    \"email\":\"thinhbo0319@gmail.com\",\r\n    \"password\":\"123123\"\r\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/user/loginTest",
+          "host": ["{{baseURL}}"],
+          "path": ["user", "loginTest"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Update Profile User",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.response.code === 200) {\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "    const data = pm.response.json();\r",
+              "    const email = data.user.email;\r",
+              "\r",
+              "    pm.test(\"Đã cập nhật thông tin \" + email + \" thành công\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "}\r",
+              "\r",
+              "if(pm.response.code === 400) {\r",
+              "    pm.test(\"Status code is 400\", function () {\r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "    const data = pm.response.json();\r",
+              "    const message = data.message;\r",
+              "\r",
+              "    pm.test(message, function () {  \r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessTokenForUpdate}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"username\": \"newUsername\",\r\n  \"phoneNumber\": \"0987652131\",\r\n  \"Date\": \"2024-12-14\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/user/updateTest",
+          "host": ["{{baseURL}}"],
+          "path": ["user", "updateTest"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Add Address",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.response.code === 200) {\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    });\r",
+              "    \r",
+              "}\r",
+              "\r",
+              "if(pm.response.code === 400) {\r",
+              "    pm.test(\"Status code is 400\", function () {\r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "    const data = pm.response.json();\r",
+              "    const message = data.message;\r",
+              "\r",
+              "    pm.test(message, function () {  \r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessTokenForUpdate}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"address\": \"Cần Giờ, Thành phố Hồ Chí Minh\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/user/address",
+          "host": ["{{baseURL}}"],
+          "path": ["user", "address"]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Change Password",
+      "event": [
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "if(pm.response.code === 200) {\r",
+              "    pm.test(\"Status code is 200\", function () {\r",
+              "        pm.response.to.have.status(200);\r",
+              "    }); \r",
+              "}\r",
+              "\r",
+              "if(pm.response.code === 400) {\r",
+              "    pm.test(\"Status code is 400\", function () {\r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "    const data = pm.response.json();\r",
+              "    const message = data.message;\r",
+              "\r",
+              "    pm.test(message, function () {  \r",
+              "        pm.response.to.have.status(400);\r",
+              "    });\r",
+              "}"
+            ],
+            "type": "text/javascript",
+            "packages": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{accessTokenForUpdate}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "PUT",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\r\n  \"password\": \"123qwe\"\r\n}\r\n",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{baseURL}}/user/changePass/{{userId}}",
+          "host": ["{{baseURL}}"],
+          "path": ["user", "changePass", "{{userId}}"]
+        }
+      },
+      "response": []
+    }
+  ]
+}
